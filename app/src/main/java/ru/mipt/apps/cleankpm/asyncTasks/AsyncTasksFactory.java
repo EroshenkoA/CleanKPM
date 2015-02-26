@@ -1,10 +1,13 @@
 package ru.mipt.apps.cleankpm.asyncTasks;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.Serializable;
 
 import ru.mipt.apps.cleankpm.activities.AsyncTaskCaller;
 import ru.mipt.apps.cleankpm.activities.tabs.TabActivityKPM;
+import ru.mipt.apps.cleankpm.activities.tabs.event.EventsActivity;
 import ru.mipt.apps.cleankpm.constants.Config;
 import ru.mipt.apps.cleankpm.statics.BufWrapper;
 import ru.mipt.apps.cleankpm.userObjects.User;
@@ -13,7 +16,7 @@ import ru.mipt.apps.cleankpm.userObjects.User;
  * Created by User on 2/23/2015.
  */
 public class AsyncTasksFactory {
-    public static DefaultAsyncTask createTask(final AsyncTaskCaller a, int commandGot){
+    public static DefaultAsyncTask createTask(final AsyncTaskCaller a, final int commandGot){
         final int commandFromActivity=commandGot;
 
         DefaultAsyncTask task = new DefaultAsyncTask(a) {
@@ -22,6 +25,7 @@ public class AsyncTasksFactory {
             protected Void doInBackground(Void... params) {
                 setBuf();
                 initSocket();
+                Log.d("", "command is "+commandGot);
                 buf = (BufWrapper.convertToBuf(commandFromActivity));
                 switch(commandFromActivity){
 
@@ -31,6 +35,7 @@ public class AsyncTasksFactory {
                     case Config.UPDATE_USER:
                     {
                         Serializable serialObject =  a.transmitObject();
+                        if (serialObject == null) Log.d("","null serial");
                         try {
                             oos.write(buf);
                             oos.writeObject(serialObject);
@@ -115,6 +120,10 @@ public class AsyncTasksFactory {
                     case Config.NAME_EXISTS: {
                         a.makeToast("name occupied");
                         break;
+                    }
+
+                    case Config.OK: {
+                        a.launchIntent(EventsActivity.class, user/*both arguments are not needed here! terrible style!*/);
                     }
 
                 }

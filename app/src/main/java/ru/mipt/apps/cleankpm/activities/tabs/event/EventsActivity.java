@@ -3,6 +3,7 @@ package ru.mipt.apps.cleankpm.activities.tabs.event;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -89,18 +90,25 @@ public class EventsActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    public void addEventToEventsListInActivity(Event event){
+        adapter.add(event.getEventName());
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch(requestCode){
             case getEventRequestCode:{
+                Log.d("","hi all");
                 if (data == null) {return;}
+                Log.d("","hi allss");
                 Event event = (Event) data.getSerializableExtra("event created");
-                adapter.add(event.getEventName());
                 //User user = ((MainActivity) ((/*(TabActivityKPM)*/ getParent()).getParent())).getUser();
                 User user = MainActivity.getUser();
                 user.addEvent(event);
-                ServerUpdate.updateEvent(event);
-                ServerUpdate.updateUser(user);
+                ServerUpdate serverUpdateEvent = new ServerUpdate(this);
+                ServerUpdate serverUpdateUser = new ServerUpdate(this);
+                Log.d("","server update");
+                serverUpdateEvent.updateEvent(event);
+                serverUpdateUser.updateUser(user);
                 break;
             }
         }
