@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="loginCheckBox">Remember me</string>
+
+    <string name="app_name">CleanKPM</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="text_tab">Это создано с помощью LayoutInflater </string>
+    <string name="add_new_button">Add new</string>
+    <string name="type_name_textView">type name</string>
+    <string name="ok">ok</string>
+    <string name="finish">finish</string>
+    <string name="type_name">type name</string>
+    <string name="type_password">type password</string>
+    <string name="sign_in">sign in</string>
+    <string name="sign_up">sign up</string>
+    <string name="secret">secret</string>
+    <string name="my_page">on my page</string>
+    <string name="impose">impose</string>
+    <string name="choose_starttime">start time</string>
+    <string name="choose_endtime">end time</string>
+    <string name="choose_date">date</string>
+    <string name="min_friends">friends required</string>
+
+</resources>
