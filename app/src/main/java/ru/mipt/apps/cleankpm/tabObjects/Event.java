@@ -28,17 +28,20 @@ public class Event implements Serializable {
     private int minutesStart=UNSET;
     private int minutesEnd=UNSET;
     private int minFriends = UNSET;
-    private ArrayList<User> mayAttendPeople;
-    private ArrayList<User> willAttendPeople;
+    private ArrayList<String> mayAttendPeople;
+    private ArrayList<String> willAttendPeople;
     private boolean conditionsComplied = false;
 
     public Event(){
         //setCreator
-        mayAttendPeople = new ArrayList<>();
-        willAttendPeople = new ArrayList<>();
+        mayAttendPeople = new ArrayList<String>();
+        willAttendPeople = new ArrayList<String>();
         eventName = null;
     }
 
+    public void addMayAttend(String name){
+        mayAttendPeople.add(name);
+    }
     public void setMinFriends(int f){
         minFriends = f;
     }

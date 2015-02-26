@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import ru.mipt.apps.cleankpm.R;
 import ru.mipt.apps.cleankpm.activities.MainActivity;
 import ru.mipt.apps.cleankpm.activities.tabs.TabActivityKPM;
+import ru.mipt.apps.cleankpm.serverOrders.ServerUpdate;
 import ru.mipt.apps.cleankpm.tabObjects.Event;
 import ru.mipt.apps.cleankpm.userObjects.User;
 
@@ -98,6 +99,8 @@ public class EventsActivity extends Activity implements View.OnClickListener {
                 //User user = ((MainActivity) ((/*(TabActivityKPM)*/ getParent()).getParent())).getUser();
                 User user = MainActivity.getUser();
                 user.addEvent(event);
+                ServerUpdate.updateEvent(event);
+                ServerUpdate.updateUser(user);
                 break;
             }
         }
